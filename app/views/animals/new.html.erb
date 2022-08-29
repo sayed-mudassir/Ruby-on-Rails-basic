@@ -1,0 +1,11 @@
+<h1>animal info</h1>
+<%= form_for @animal do |form| %>
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+	<%= form.label :animal_type %>
+	<%= form.text_field :animal_type %>
+	<%= form.label :count %>
+	<%= form.number_field :count %>
+
+	<%= form.submit %>
+	<%end%>

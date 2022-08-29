@@ -1,0 +1,44 @@
+
+<h1>laptops info</h1>
+<%= link_to 'new', new_laptop_path %>
+
+<%= form_with(url: bulk_delete_laptops_url,method: :delete, data:{confirm: "are you sure"} ) do |form|%>
+<%= form.submit "bulk delete" %>
+<table >
+	<thead>
+		<th>select</th>
+		<th>barnd</th>
+		<th>model</th>
+		<th>price</th>
+		<th>actons</th>
+	</thead>
+	<tbody>
+		<% @laptops.each do |laptop| %>
+		<tr>
+
+			<td><%= form.check_box "laptop_id[]",{}, laptop.id, '' %>
+				<td>
+					<%= laptop.brand %>
+				</td>
+
+				<td>
+					<%= laptop.model %>
+				</td>
+
+				<td>
+					<%= laptop.price %>
+				</td>
+				<td>
+					<%= link_to 'edit', edit_laptop_path(laptop) %>
+					<%= link_to 'show', laptop_path(laptop) %>
+					<%= link_to 'delete',laptop, method: :delete, data:{confirm: "are you sure"} %>
+				</td>
+			
+
+		</tr>
+		<%end%>
+
+	</tbody>
+
+</table>
+<%end%>

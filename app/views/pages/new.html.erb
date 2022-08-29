@@ -1,0 +1,22 @@
+<h1>new page</h1>
+
+<%= form_with(model: @page ) do |form| %>
+
+	<% if @page.errors.any? %>
+	<h2><%= pluralize(page.error.count, "error") %> prohibited this page from being saved:</h2>
+
+		<%= page.errors.each do |error| %>
+		<%= error.full_message %>
+		<%end%>
+	<%end%>
+
+	<%= form.label :title %>
+	<%= form.text_field :title %>
+	<%= form.label :body %>
+	<%= form.text_area :body %>
+	<%= form.label :page_num %>
+	<%= form.number_field :page_num %>
+	<%= form.submit %>
+
+	<%end%> 
+

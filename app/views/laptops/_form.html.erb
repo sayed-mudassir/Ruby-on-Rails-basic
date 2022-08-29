@@ -1,0 +1,13 @@
+<%= form_with(model: @laptop) do |form| %>
+<%= form.label :brand %>
+<%= form.text_field :brand %>
+
+<%= form.label :model %>
+<%= form.text_field :model %>
+
+<%= form.label :price %>
+<%= form.number_field :price %>
+
+<%= form.submit %>
+
+<%end%>

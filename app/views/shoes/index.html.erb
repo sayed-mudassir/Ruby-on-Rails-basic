@@ -1,0 +1,13 @@
+<h1>shoes detail</h1>
+<%= link_to 'new', new_shoe_path %><br><br>
+
+<% @shoes.each do |shoe| %>
+<h3>this is the brand : <%= shoe.brand %><br><br></h3>
+<h3>shoe size : <%= shoe.size %><br><br></h3>
+<h3>price : <%= shoe.price %>Rshs.<br><br></h3>
+
+<%= link_to 'edit',  edit_shoe_path(shoe) %><br><br>
+<%= link_to 'show', shoe_path(shoe) %><br><br>
+<%= link_to 'delete', shoe , method: :delete , data:{confirm: "are you sure" } %><br><br>
+
+<%end%>

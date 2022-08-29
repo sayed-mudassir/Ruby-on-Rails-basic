@@ -1,0 +1,57 @@
+
+<h1>student details</h1>
+<%= link_to 'new', new_student_path, class: 'btn btn-outline-secondary' %><br><br>
+
+
+<%=form_with(url: bulk_delete_students_url ,method: :delete) do |form|%>
+
+<%=form.submit "Bulk delete"%>
+<table class="table">
+
+	<thead>
+		<th></th>
+		<th>Student Name</th>
+		<th>Class</th>
+		<th>Roll Number</th>
+		<th>Actions</th>
+		<th>status</th>
+	</thead>
+	
+	<tbody>
+
+		<% @students.each do |student| %>
+		<tr>
+			<td><%=form.check_box "student_id[]",{}, student.id,''%></td>
+			<td>
+				<%= student.name %>
+			</td>
+
+			<td>
+				<%= student.student_class %>
+			</td>
+
+			<td>
+				 <%= student.roll_no %>
+			</td>
+
+			<td>
+				
+				<%= link_to 'edit', edit_student_path(student), class: 'btn btn-outline-secondary' %>
+				<%= link_to 'show', student_path(student), class: 'btn btn-outline-secondary' %>
+				<%= link_to 'delete',student, method: :delete, data:{confirm: "are you sure"}, class: 'btn btn-outline-secondary' %>
+
+
+			</td>
+			<td>
+				<%= link_to student.status.capitalize, toggel_status_student_path(student), class: 'btn btn-outline-primary' %>
+				
+			</td>
+
+		</tr>
+
+		<%end%>
+	</tbody>
+</table>
+
+
+<%end%>

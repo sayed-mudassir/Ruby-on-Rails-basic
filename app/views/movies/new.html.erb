@@ -1,0 +1,11 @@
+<h1>add movies</h1>
+<%= form_for @movie do |form| %>
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+	<%= form.label :release_date %>
+	<%= form.date_field :release_date %>
+	<%= form.label :rating %>
+	<%= form.number_field :rating %>
+
+	<%= form.submit %>
+	<%end%>

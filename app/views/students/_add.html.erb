@@ -1,0 +1,16 @@
+<h1>enter the student details </h1>
+<br><br>
+<% if @student.errors.any? %>
+<% @student.errors.full_messages.each do |m| %>
+<%= m %>
+<%end%>
+<%end%>
+<%= form_with(model: @student) do |form| %>
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+	<%= form.label :student_class %>
+	<%= form.text_field :student_class %>
+	<%= form.label :roll_no %>
+	<%= form.number_field :roll_no %>
+	<%= form.submit %>
+	<%end%>

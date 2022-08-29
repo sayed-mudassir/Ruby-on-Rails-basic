@@ -1,0 +1,14 @@
+<% if @bird.errors.any? %>
+<% @bird.errors.full_messages.each do |m| %>
+<div><%= m %></div>
+<%end%>
+<%end%>
+
+<h1>enter birds details</h1>
+<%= form_for @bird do |bird| %>
+	<%= bird.label :name %>
+	<%= bird.text_field :name %>
+	<%= bird.label :size %>
+	<%= bird.number_field :size %>
+	<%= bird.submit %>
+	<%end%>

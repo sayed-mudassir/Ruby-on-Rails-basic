@@ -1,0 +1,52 @@
+<h1>bird info</h1>
+<br><br>
+
+
+<% flash.each do %>
+<%= flash[:notice] %>
+<%end%>
+<%= link_to 'new',new_bird_path %><br>
+<%= form_with(url: bulk_delete_birds_url, method: :delete, data:{confirm: "are you sure"}) do |form| %>
+<%= form.submit "bulk delete" %>
+<table class="table">
+	<thead>
+		<th>
+			select
+		</th>
+		<th>
+			name
+		</th>
+		<th>
+			size
+		</th>
+		<th>
+			action
+		</th>
+		<th>Status</th>
+
+	</thead>
+
+	<tbody>
+		<% @birds.each do |bird| %>
+		<tr>
+			<td><%= form.check_box "bird_id[]",{}, bird.id, '' %></td>
+			<td><%= bird.name %></td>
+			<td><%= bird.size %></td>
+			<td>
+				<%= link_to 'edit', edit_bird_path(bird) %>
+				<%= link_to 'show', bird_path(bird) %>
+
+				<%= link_to 'delete', bird,method: :delete , data:{confirm: "are you sure"} %>
+			</td>
+			<td><%= link_to bird.status.capitalize, toggel_status_bird_path(bird), class: 'btn btn-outline-primary' %></td>
+		</tr>
+		<%end%>
+	</tbody>
+
+<%end%>
+
+
+
+
+
+	

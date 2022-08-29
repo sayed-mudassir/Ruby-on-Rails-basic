@@ -1,0 +1,13 @@
+<h1>Upcomming movies</h1>
+<%= link_to 'new' , new_movie_path %>
+
+<% @movies.each do |movie| %>
+<%= movie.name %>
+<%= movie.release_date %>
+<%= movie.rating %>
+
+<%= link_to 'edit' , edit_movie_path(movie) %>
+<%= link_to 'show' , movie_path(movie) %>
+
+<%= link_to 'delete' , movie , method: :delete , data:{confirm:"are you sure"} %>
+<%end%>

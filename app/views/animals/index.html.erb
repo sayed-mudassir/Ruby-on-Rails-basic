@@ -1,0 +1,12 @@
+<h1>animals</h1>
+<%= link_to 'new' , new_animal_path %>
+<% @animals.each do |animal| %>
+	<%= animal.name %>
+	<%= animal.animal_type %>
+	<%= animal.count %>
+
+	<%= link_to 'edit', edit_animal_path(animal) %>
+	<%= link_to 'show' , animal_path(animal) %>
+
+	<%= link_to 'delete' , animal , method: :delete , data:{confirm:"are you sure"} %>
+	<%end%>

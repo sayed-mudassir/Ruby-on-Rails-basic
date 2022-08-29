@@ -1,0 +1,3 @@
+ <%= form_with (model: page) do |form| %>
+ <% if page.error.any? %>
+ <div><%= pluralize(page.error.count "error" ), probhited this page %></div>

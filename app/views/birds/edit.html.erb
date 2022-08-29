@@ -1,0 +1,8 @@
+<h1>enter birds details</h1>
+<%= form_for @bird do |bird| %>
+	<%= bird.label :name %>
+	<%= bird.text_field :name %>
+	<%= bird.label :size %>
+	<%= bird.number_field :name %>
+	<%= bird.submit %>
+	<%end%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_28_202315) do
+ActiveRecord::Schema.define(version: 2022_08_29_082055) do
 
   create_table "animals", force: :cascade do |t|
     t.string "name"
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 2022_08_28_202315) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.integer "student_id"
+    t.string "name"
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

@@ -5,7 +5,7 @@
 
 <%=form_with(url: bulk_delete_students_url ,method: :delete) do |form|%>
 
-<%=form.submit "Bulk delete"%>
+<%=form.submit "Bulk delete", class: 'btn btn-outline-danger' %>
 <table class="table">
 
 	<thead>
@@ -38,7 +38,7 @@
 				
 				<%= link_to 'edit', edit_student_path(student), class: 'btn btn-outline-secondary' %>
 				<%= link_to 'show', student_path(student), class: 'btn btn-outline-secondary' %>
-				<%= link_to 'delete',student, method: :delete, data:{confirm: "are you sure"}, class: 'btn btn-outline-secondary' %>
+				<%= link_to 'delete',student, method: :delete, data:{confirm: "are you sure"}, class: 'btn btn-outline-danger' %>
 
 
 			</td>

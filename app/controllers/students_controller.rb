@@ -11,19 +11,35 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
-    @student.save
-    redirect_to '/students/new'
+    
+    @student.save!
+    redirect_to '/students'
   end
 
   def show
+  end
+
+  def destroy_subject
+    byebug
+  @subject = Subject.find(params[:subject_id])
+    @subject.destroy
+    redirect_to "/students/#{params[:id]}"
+  end
+
+  def bulk_subject_delete
+    params[:subject_id].uniq.each {|x| Subject.find(x).destroy if x.present? }
+    redirect_to '/student'
   end
 
   def edit
   end
 
   def update
-    @student = Student.new(student_params)
-    redirect_to '/students'
+    if   @student.update(student_params)
+      redirect_to '/students'
+    else 
+      render :edit
+    end
   end
 
   def destroy
@@ -53,7 +69,7 @@ class StudentsController < ApplicationController
 
   def student_params
   	#params.permit!
-    params.permit(:name, :student_class, :roll_no)
+    params.require(:student).permit(:name, :student_class, :roll_no, subjects_attributes: [:id, :name, :score, :_destroy])
   end
 
 

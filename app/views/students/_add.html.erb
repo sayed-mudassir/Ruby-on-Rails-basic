@@ -1,4 +1,4 @@
-<h1>enter the student details </h1>
+	<h1>enter the student details </h1>
 <br><br>
 <% if @student.errors.any? %>
 <% @student.errors.full_messages.each do |m| %>
@@ -6,11 +6,27 @@
 <%end%>
 <%end%>
 <%= form_with(model: @student) do |form| %>
-	<%= form.label :name %>
+	<%= form.label :student_name %>
 	<%= form.text_field :name %>
 	<%= form.label :student_class %>
 	<%= form.text_field :student_class %>
 	<%= form.label :roll_no %>
 	<%= form.number_field :roll_no %>
+	<h3>results</h3>
+
+  <div class="nested-fields">
+  	<%= form.fields_for :subjects do |subject| %>
+		<%= render 'subject_fields', f: form %>
+		<%#= form.label :subject_name %>
+		<%#= form.text_field :name %>
+		
+		<%#= form.label :score %>
+		<%#= form.number_field :score %>
+
+	<%end%>
+
+	<%= link_to_add_association 'add subject', form, :subjects, class: 'btn btn-primary' %>
+  	
+  </div><br><br>
 	<%= form.submit %>
 	<%end%>

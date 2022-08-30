@@ -8,9 +8,11 @@ Rails.application.routes.draw do
 
     collection do 
       delete "bulk_delete"
+      delete "bulk_subject_delete"
     end
     member do 
       get :toggel_status
+      delete :destroy_subject
     end
 
   end

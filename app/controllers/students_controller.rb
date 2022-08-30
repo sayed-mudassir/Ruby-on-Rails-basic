@@ -20,7 +20,6 @@ class StudentsController < ApplicationController
   end
 
   def destroy_subject
-    byebug
   @subject = Subject.find(params[:subject_id])
     @subject.destroy
     redirect_to "/students/#{params[:id]}"

@@ -1,0 +1,25 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+<%= form_with(url: bulk_task_delete_project_path(@project),html: { method: :delete}, data:{confirm: "are you sure"}) do |form| %>
+
+<%= form.submit "bulk delete" %>
+<% @tasks.each do |task| %>
+
+<%= form.check_box "task_id[]",{}, task.id, '' %>
+<div>
+  <%= task.description %>
+</div>
+<%= link_to 'delete',  task_delete_project_path(@project, task_id: task.id),method: :delete %>
+<%end%>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
+<%end%>

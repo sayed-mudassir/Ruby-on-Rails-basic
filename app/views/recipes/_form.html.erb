@@ -1,0 +1,30 @@
+<%= form_with(model: recipe) do |form| %>
+  <% if recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+        <% recipe.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.fields_for :ingridients do |recipe| %>
+    <%= render 'ingridient_fields', f: form %>
+    <%end%>
+    
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+    <%= link_to_add_association 'add tasks', form, :ingridients, class: 'btn btn-outline-secondary' %>
+  </div>
+<% end %>

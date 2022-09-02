@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_29_082055) do
+ActiveRecord::Schema.define(version: 2022_09_01_125011) do
 
   create_table "animals", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 2022_08_29_082055) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "breed"
     t.integer "status", default: 0
+  end
+
+  create_table "ingridients", force: :cascade do |t|
+    t.string "item"
+    t.integer "amount"
+    t.integer "recipe_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id"], name: "index_ingridients_on_recipe_id"
   end
 
   create_table "laptops", force: :cascade do |t|
@@ -53,6 +62,19 @@ ActiveRecord::Schema.define(version: 2022_08_29_082055) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "shoes", force: :cascade do |t|
     t.string "brand"
     t.integer "size"
@@ -71,11 +93,24 @@ ActiveRecord::Schema.define(version: 2022_08_29_082055) do
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.integer "student_id"
-    t.string "name"
-    t.integer "score"
+    t.string "subject_name"
+    t.integer "marks"
+    t.integer "student_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_subjects_on_student_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "description"
+    t.boolean "done"
+    t.integer "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+  end
+
+  add_foreign_key "ingridients", "recipes"
+  add_foreign_key "subjects", "students"
+  add_foreign_key "tasks", "projects"
 end

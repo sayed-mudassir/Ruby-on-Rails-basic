@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
+  resources :recipes
+  resources :projects do
+    member do
+      delete 'task_delete'
+      delete 'bulk_task_delete'
+    end
+  end
   resources :laptops do
     collection do
       delete "bulk_delete"
     end
   end
   resources :students do
-
+      
     collection do 
       delete "bulk_delete"
       delete "bulk_subject_delete"

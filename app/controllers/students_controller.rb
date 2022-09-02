@@ -1,6 +1,6 @@
-class StudentsController < ApplicationController
+  class StudentsController < ApplicationController
   before_action :set_student, only: %i[show edit update destroy toggel_status]
-
+  # before_action :set_subject, only: %i[destroy_subject]
   def index
     @students = Student.all
   end
@@ -14,13 +14,14 @@ class StudentsController < ApplicationController
     
     @student.save!
     redirect_to '/students'
-  end
+  end 
 
   def show
+    @subject = @student.subjects
   end
 
   def destroy_subject
-  @subject = Subject.find(params[:subject_id])
+    @subject = @student.subjects.find(params[:subject_id])
     @subject.destroy
     redirect_to "/students/#{params[:id]}"
   end
@@ -66,9 +67,13 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
   end
 
+  # def set_subject
+  #   @subject = @student.subjects.find(params[:subject_id])
+  # end
+
   def student_params
   	#params.permit!
-    params.require(:student).permit(:name, :student_class, :roll_no, subjects_attributes: [:id, :name, :score, :_destroy])
+    params.require(:student).permit(:name, :student_class, :roll_no, subjects_attributes: [:id, :subject_name, :marks, :_destroy])
   end
 
 

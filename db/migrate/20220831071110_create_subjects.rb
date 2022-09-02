@@ -1,10 +1,11 @@
 class CreateSubjects < ActiveRecord::Migration[6.1]
   def change
     create_table :subjects do |t|
-      t.integer :student_id
-      t.string :name
-      t.integer :score
-      
+      t.string :subject_name
+      t.integer :marks
+      t.belongs_to :student, null: false, foreign_key: true
+
+
       t.timestamps
     end
   end

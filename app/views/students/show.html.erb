@@ -1,0 +1,36 @@
+<h3>info</h3>
+<h5>
+	<strong>name : <%= @student.name %></strong>
+</h5>
+<h5>
+	<strong>class : <%= @student.student_class %></strong>
+</h5>
+<h5>
+	<strong>roll number : <%= @student.roll_no %></strong>
+</h5>
+<%= form_with(url:  bulk_subject_delete_student_path(@student),html: { method: :delete}, data:{confirm: "are you sure"}) do |form| %>
+<%= form.submit "bulk delete", class: 'btn btn-outline-danger' %>
+<table class="table">
+	<thead>
+		<th><strong>select:</strong></th>
+		<th><strong>subject Name:</strong></th>
+		<th><strong>marks</strong></th>
+		<th><strong>actions</strong></th>
+	</thead>
+	<tbody>
+		<% @subjects.each do |subject| %>
+		<tr>
+			<td><%= form.check_box "subject_id[]",{}, subject.id, '' %></td>
+			<td><%= subject.subject_name %></td>
+			<td><%= subject.marks %></td>
+			<td><%= link_to 'delete',  destroy_subject_student_path(@student, subject_id: subject.id),method: :delete, data: {confirm: "are you sure"}, class: 'btn btn-outline-danger' %>
+				<%= link_to 'Edit', edit_student_path(@student), class: 'btn btn-outline-secondary' %> 
+				</td>
+		</tr>
+		<%end%>
+	</tbody>
+</table>
+<div>
+	<%= link_to 'Back', students_path, class: 'btn btn-outline-primary' %>
+</div>		
+<%end%>

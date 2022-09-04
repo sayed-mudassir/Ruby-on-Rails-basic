@@ -1,5 +1,5 @@
-  class StudentsController < ApplicationController
-  before_action :set_student, only: %i[show edit update destroy toggel_status]
+class StudentsController < ApplicationController
+before_action :set_student, only: %i[show edit update destroy destroy_subject bulk_subject_delete ]
   # before_action :set_subject, only: %i[destroy_subject]
   def index
     @students = Student.all
@@ -12,12 +12,12 @@
   def create
     @student = Student.new(student_params)
     
-    @student.save!
+    @student.save
     redirect_to '/students'
   end 
 
   def show
-    @subject = @student.subjects
+    @subjects = @student.subjects
   end
 
   def destroy_subject
@@ -27,8 +27,8 @@
   end
 
   def bulk_subject_delete
-    params[:subject_id].uniq.each {|x| Subject.find(x).destroy if x.present? }
-    redirect_to '/student'
+    params[:subject_id].uniq.each {|x| @student.subjects.find(x).destroy if x.present? }
+    redirect_to project_path(@student)
   end
 
   def edit
@@ -48,17 +48,8 @@
   end 
 
   def bulk_delete
-  	params[:student_id].uniq.each {|x| Student.find(x).destroy if x.present?}
+    params[:student_id].uniq.each {|x| Student.find(x).destroy if x.present?}
     redirect_to '/students'
-  end
-
-  def toggel_status
-    if @student.draft?
-      @student.published!
-    else
-    @student.draft!
-    end 
-    redirect_to students_path
   end
 
   private
@@ -67,12 +58,8 @@
     @student = Student.find(params[:id])
   end
 
-  # def set_subject
-  #   @subject = @student.subjects.find(params[:subject_id])
-  # end
-
   def student_params
-  	#params.permit!
+    #params.permit!
     params.require(:student).permit(:name, :student_class, :roll_no, subjects_attributes: [:id, :subject_name, :marks, :_destroy])
   end
 

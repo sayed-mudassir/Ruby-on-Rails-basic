@@ -11,15 +11,13 @@ Rails.application.routes.draw do
       delete "bulk_delete"
     end
   end
-  resources :students do
-      
-    collection do 
-      delete "bulk_delete"
-      delete "bulk_subject_delete"
-    end
+ resources :students do 
     member do 
-      get :toggel_status
-      delete :destroy_subject
+      delete 'destroy_subject'
+      delete 'bulk_subject_delete' 
+    end
+    collection do
+       delete "bulk_delete"
     end
 
   end
